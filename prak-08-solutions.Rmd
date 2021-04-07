@@ -1,0 +1,233 @@
+---
+title: "Praktikum 08 - Ehedaten"
+author: ""
+date: ""
+output: 
+  html_document: 
+    toc: true
+    toc_float: true
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+```{r lade-packages}
+
+## Allesamt teil des Tidyverse und können auch mit library(tidyverse) geladen werden
+
+library(dplyr)
+library(ggplot2)
+library(lubridate)
+library(readr)
+
+```
+
+Ein Datensatz vom Staatsarchiv des Kantons Zürich mit Ehedaten im aus dem 16. bis 18. Jahrhundert. Abgedeckt wird der Zeitraum vom 1. Januar 1500 bis 31. Dezember 1800. 
+
+Metadaten sind auf [opendata.swiss publiziert](https://opendata.swiss/de/dataset/ehedaten-kanton-zurich-16-bis-18-jahrhundert) und die Ressource verlinkt auf das Archiv Zenodo. 
+
+# Anleitung: Teamarbeit
+
+In diesem Praktikum arbeitet ihr zum ersten Mal als ein Team an einem gemeinsamen Repo. Ihr seht dies bereits an dem Namen für das Praktikum, welcher nun `prak08-team0X` ist und nicht mehr der euer individueller Benutzername. 
+
+# Git pull
+
+Neben generellen Übungen geht es in diesem Praktikum darum, dass ihr Übung mit einem neuen Git Befehl "pull" bekommt. Bisher habt ihr die Befehle "add", "commit" und "push" kennengelernt. In den folgenden Übungen gilt:
+
+**Person 1 - Pusher**
+
+- Öffnet die R Markdown Datei für die Übung
+- Teilt den Bildschirm
+- Schreibt den Code
+- Führt die Git Befehle "add", "commit" und "push" aus
+
+**Person 2 - Puller**
+
+- Öffnet die R Markdown Datei für die Übung
+- Schreibt selbst **keinen** Code
+- Unterstützt Person 1 bei den Übungen
+- Führt den Befehl Git Befehl "pull" aus
+
+Nach jeder Übung werden die Rollen getauscht.
+
+# Übungen
+
+## Übung 0
+
+**Achtung: Nur Person 1 erledigt die Aufgaben. Person 2 unterstützt verbal, aber schreibt selbst nicht in der R Markdown Datei**
+
+1. **Person 1:** Füge eure Namen und das Datum im YAML Header hinzu
+2. **Person 1:** Knit, commit und push all deine Änderungen auf GitHub
+3. **Person 2:** In RStudio, öffne den Reiter Git im Fenster oben rechts. 
+4. **Person 2:** Klicke auf "Pull" (der blaue Pfeil, rechts neben "Commit", welcher nach unten zeigt)
+
+```{r daten-import}
+
+# Daten importieren
+
+download_link <- "https://zenodo.org/record/3964315/files/EDB_16_18_Jh_Stand_2020_07_22.CSV?download=1"
+
+ehedaten <- read_delim(download_link, delim = ";",
+                       locale = locale(encoding = "ISO-8859-1")) 
+
+```
+
+```{r daten-transform}
+
+# Daten transformieren
+
+ehedaten_tidy <- ehedaten %>% 
+
+  # bereinige die Namen
+  janitor::clean_names() %>% 
+  
+  # selektiere nur einen Teil der Variablen
+  select(nachname_mann:kirchgemeinde) %>% 
+  
+  # erstelle eine neue Variable mit der Klasse "Date"
+  mutate(datum = parse_date(entstehungszeitraum, format = "%Y.%m.%d")) %>%
+  
+  # entferne die Beobachtungen, welche nicht umgewandelt werden konnten
+  filter(!is.na(datum)) %>% 
+
+  # erstelle zusätzliche Variablen aus der neuen Variable datum
+  # nutze dazu Funktionen aus dem lubridate Package
+  mutate(
+    jahr = year(datum),
+    monat = month(datum, label = TRUE),
+    tag = day(datum),
+    wochentag = wday(datum, label = TRUE, week_start = 1)
+  )
+
+```
+
+## Übung 1 
+
+**Achtung: Nur Person 1 erledigt die Aufgaben. Person 2 unterstützt verbal, aber schreibt selbst nicht in der R Markdown Datei**
+
+Startet mit dem Dataframe Objekt `ehedaten_tidy`, nutzt Funktionen aus dem `dplyr` Package und bearbeitet folgende Aufgaben: 
+
+1. Was sind die Top 10 Kirchgemeinden in denen geheiratet wurde? 
+2. Speicher die Namen der Top 10 Kirchgemeinden als einen Vektor mit dem Namen `vektor_top10_kirchgemeinde`
+3. **Person 1:** Knit, commit und push all deine Änderungen auf GitHub
+4. **Person 2:** In RStudio, öffne den Reiter Git im Fenster oben rechts. 
+5. **Person 2:** Klicke auf "Pull" (der blaue Pfeil, rechts neben "Commit", welcher nach unten zeigt)
+
+
+```{r}
+
+vektor_top10_kirchgemeinde <- ehedaten_tidy %>% 
+  count(kirchgemeinde) %>% 
+  arrange(desc(n)) %>% 
+  head(10) %>% 
+  pull(kirchgemeinde)
+
+```
+
+## Übung 2 
+
+**Achtung: Tauscht die Rollen und beachtet was für die jeweilige Rolle gilt.**
+
+Startet mit dem Dataframe Objekt `ehedaten_tidy`, nutzt Funktionen aus dem `dplyr` Package und bearbeitet folgende Aufgaben: 
+
+1. Für wieviele Jahre gibt es Eheschliessungen?
+2. Was sind die Top 10 Jahre für Eheschliessungen?
+3. In welchen Monaten wurde am häufigsten geheiratet?
+4. Was ist das Datum von dem Tag an dem im Grossmünster die meisten Ehen geschlossen?
+5. **Person 1:** Knit, commit und push all deine Änderungen auf GitHub
+6. **Person 2:** In RStudio, öffne den Reiter Git im Fenster oben rechts. 
+7. **Person 2:** Klicke auf "Pull" (der blaue Pfeil, rechts neben "Commit", welcher nach unten zeigt)
+
+```{r}
+
+ehedaten_tidy %>% 
+  count(jahr) %>% 
+  arrange(desc(n))
+
+ehedaten_tidy %>% 
+  count(monat)
+
+ehedaten_tidy %>% 
+  filter(kirchgemeinde == "Grossmünster") %>% 
+  count(datum) %>% 
+  arrange(desc(n))
+
+
+```
+
+## Übung 3
+
+**Achtung: Tauscht die Rollen und beachtet was für die jeweilige Rolle gilt.**
+
+Startet mit dem Dataframe Objekt `ehedaten_tidy`, nutzt Funktionen aus dem `dplyr` Package und bearbeitet folgende Aufgaben: 
+
+1. Erstellt eine Häufigkeitstabelle gruppiert nach Monaten und Wochentagen
+2. Speichert diese Häufigkeitstabelle als einen neuen Dataframe mit dem Namen `ehedaten_n_mw`
+
+```{r}
+
+ehedaten_n_mw <- ehedaten_tidy %>% 
+  count(monat, wochentag)
+
+```
+
+Startet mit dem Dataframe Objekt `ehedaten_n_mw`, nutzt Funktionen aus dem `ggplot2` Package, und bearbeitet folgende Aufgaben: 
+
+1. Erstellt ein verbundenes Streudiagram, mit:
+- Variable `wochentag` auf der x-Achse
+- Variable `n` auf der y-Achse
+- Gruppiert nach Monat
+- Facetted nach Monat
+2. Nutzt die Visualisierung um zu identifizieren an welchem Wochentag am häufigsten geheiratet wurde, und an welchem Wochentag am wengisten geheiratet wurde. Habt ihr Ideen warum das so sein könnte?
+3. **Person 1:** Knit, commit und push all deine Änderungen auf GitHub
+4. **Person 2:** In RStudio, öffne den Reiter Git im Fenster oben rechts. 
+5. **Person 2:** Klicke auf "Pull" (der blaue Pfeil, rechts neben "Commit", welcher nach unten zeigt)
+
+```{r}
+
+ehedaten_n_mw %>% 
+  ggplot(aes(x = wochentag, y = n, group = monat)) +
+  geom_path() +
+  geom_point() +
+  facet_wrap(~monat)
+
+```
+
+
+## Übung 4 - Bonus
+
+**Achtung: Tauscht die Rollen und beachtet was für die jeweilige Rolle gilt.**
+
+Startet mit dem Dataframe Objekt `ehedaten_n_mw`, nutzt Funktionen aus dem `ggplot2` Package, und bearbeitet folgende Aufgaben: 
+
+1. Erstellt ein verbundenes Streudiagram, mit:
+    - Variable `monat` auf der x-Achse
+    - Variable `n` auf der y-Achse
+    - Gruppiert nach Wochentag
+    - Farbskaliert nach Wochentag
+    - Einer angepassten Farbpalette aus der Colorbrewer Skalierung vom Typ "qual" 
+2. **Person 1:** Knit, commit und push all deine Änderungen auf GitHub
+3. **Person 2:** In RStudio, öffne den Reiter Git im Fenster oben rechts. 
+4. **Person 2:** Klicke auf "Pull" (der blaue Pfeil, rechts neben "Commit", welcher nach unten zeigt)
+
+```{r}
+
+ggplot(ehedaten_n_mw, aes(x = monat, y = n, group = wochentag, color = wochentag)) +
+  geom_point() +
+  geom_path() +
+  scale_color_brewer(type = "qual")
+
+```
+
+# Tastaturkürzel
+
+Ich habe hier nochmals die wichtigsten Tastaturkürzel für euch hinzugefügt
+
+- **Einen neuen Code-chunk hinzufügen:** Ctrl + Alt + I
+- **Code "Zeile für Zeile" innerhalb eines Code-chunks ausführen:** Ctrl + Enter
+- **Den gesamten Code-chunk ausführen:** Ctrl + Shift + Enter
+- **Die Pipe (%>%):** Ctrl + Shift + M
+- **Der Zuweisungs-Operator (<-)**: Alt + -
