@@ -31,25 +31,25 @@ Metadaten sind auf [opendata.swiss publiziert](https://opendata.swiss/de/dataset
 
 # Anleitung: Teamarbeit
 
-In diesem Praktikum arbeitet ihr zum ersten Mal als ein Team an einem gemeinsamen Repo. Ihr seht dies bereits an dem Namen für das Praktikum, welcher nun `prak08-team0X` ist und nicht mehr der euer individueller Benutzername. 
+In diesem Praktikum arbeitet ihr zum ersten Mal als ein Team an einem gemeinsamen Repo. Ihr seht dies bereits an dem Namen für das Praktikum, welcher nun `prak08-team0X` ist und nicht mehr euer individueller Benutzername. 
 
-# Git pull
+## Git pull
 
 Neben generellen Übungen geht es in diesem Praktikum darum, dass ihr Übung mit einem neuen Git Befehl "pull" bekommt. Bisher habt ihr die Befehle "add", "commit" und "push" kennengelernt. In den folgenden Übungen gilt:
 
-**Person 1 - Pusher**
+**Person 1 - Push**
 
 - Öffnet die R Markdown Datei für die Übung
 - Teilt den Bildschirm
 - Schreibt den Code
 - Führt die Git Befehle "add", "commit" und "push" aus
 
-**Person 2 - Puller**
+**Person 2 - Pull**
 
 - Öffnet die R Markdown Datei für die Übung
 - Schreibt selbst **keinen** Code
 - Unterstützt Person 1 bei den Übungen
-- Führt den Befehl Git Befehl "pull" aus
+- Führt den Git Befehl "pull" aus
 
 Nach jeder Übung werden die Rollen getauscht.
 
@@ -57,7 +57,7 @@ Nach jeder Übung werden die Rollen getauscht.
 
 ## Übung 0
 
-**Achtung: Nur Person 1 erledigt die Aufgaben. Person 2 unterstützt verbal, aber schreibt selbst nicht in der R Markdown Datei**
+**Achtung: Nur Person 1 teilt den Bildschirm und erledigt die Aufgaben. Person 2 unterstützt verbal, aber schreibt selbst nicht in der R Markdown Datei**
 
 1. **Person 1:** Füge eure Namen und das Datum im YAML Header hinzu
 2. **Person 1:** Knit, commit und push all deine Änderungen auf GitHub
@@ -106,7 +106,7 @@ ehedaten_tidy <- ehedaten %>%
 
 ## Übung 1 
 
-**Achtung: Nur Person 1 erledigt die Aufgaben. Person 2 unterstützt verbal, aber schreibt selbst nicht in der R Markdown Datei**
+**Achtung: Tauscht die Rollen und beachtet was für die jeweilige Rolle gilt. Nur Person 1 teilt den Bildschirm und erledigt die Aufgaben. Person 2 unterstützt verbal, aber schreibt selbst nicht in der R Markdown Datei**
 
 Startet mit dem Dataframe Objekt `ehedaten_tidy`, nutzt Funktionen aus dem `dplyr` Package und bearbeitet folgende Aufgaben: 
 
@@ -123,7 +123,7 @@ Startet mit dem Dataframe Objekt `ehedaten_tidy`, nutzt Funktionen aus dem `dply
 
 ## Übung 2 
 
-**Achtung: Tauscht die Rollen und beachtet was für die jeweilige Rolle gilt.**
+**Achtung: Tauscht die Rollen und beachtet was für die jeweilige Rolle gilt. Nur Person 1 teilt den Bildschirm und erledigt die Aufgaben. Person 2 unterstützt verbal, aber schreibt selbst nicht in der R Markdown Datei**
 
 Startet mit dem Dataframe Objekt `ehedaten_tidy`, nutzt Funktionen aus dem `dplyr` Package und bearbeitet folgende Aufgaben: 
 
@@ -142,7 +142,7 @@ Startet mit dem Dataframe Objekt `ehedaten_tidy`, nutzt Funktionen aus dem `dply
 
 ## Übung 3
 
-**Achtung: Tauscht die Rollen und beachtet was für die jeweilige Rolle gilt.**
+**Achtung: Tauscht die Rollen und beachtet was für die jeweilige Rolle gilt. Nur Person 1 teilt den Bildschirm und erledigt die Aufgaben. Person 2 unterstützt verbal, aber schreibt selbst nicht in der R Markdown Datei**
 
 Startet mit dem Dataframe Objekt `ehedaten_tidy`, nutzt Funktionen aus dem `dplyr` Package und bearbeitet folgende Aufgaben: 
 
@@ -154,7 +154,7 @@ Startet mit dem Dataframe Objekt `ehedaten_tidy`, nutzt Funktionen aus dem `dply
 
 ```
 
-Startet mit dem Dataframe Objekt `ehedaten_n_mw`, nutzt Funktionen aus dem `ggplot2` Package, und bearbeitet folgende Aufgaben: 
+**Bonus:** Startet mit dem Dataframe Objekt `ehedaten_n_mw`, nutzt Funktionen aus dem `ggplot2` Package, und bearbeitet folgende Aufgaben: 
 
 1. Erstellt ein verbundenes Streudiagram, mit:
 - Variable `wochentag` auf der x-Achse
@@ -174,7 +174,7 @@ Startet mit dem Dataframe Objekt `ehedaten_n_mw`, nutzt Funktionen aus dem `ggpl
 
 ## Übung 4 - Bonus
 
-**Achtung: Tauscht die Rollen und beachtet was für die jeweilige Rolle gilt.**
+**Achtung: Tauscht die Rollen und beachtet was für die jeweilige Rolle gilt. Nur Person 1 teilt den Bildschirm und erledigt die Aufgaben. Person 2 unterstützt verbal, aber schreibt selbst nicht in der R Markdown Datei**
 
 Startet mit dem Dataframe Objekt `ehedaten_n_mw`, nutzt Funktionen aus dem `ggplot2` Package, und bearbeitet folgende Aufgaben: 
 
