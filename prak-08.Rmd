@@ -66,14 +66,28 @@ Nach jeder Übung werden die Rollen getauscht.
 
 ```{r daten-import}
 
+# Ich habe die Daten hier für euch heruntergeladen und in dem Ordner "data" gespeichert.
+
 # Daten importieren
 
-download_link <- "https://zenodo.org/record/3964315/files/EDB_16_18_Jh_Stand_2020_07_22.CSV?download=1"
+# download_link <- "https://zenodo.org/record/3964315/files/EDB_16_18_Jh_Stand_2020_07_22.CSV?download=1"
 
-ehedaten <- read_delim(download_link, delim = ";",
-                       locale = locale(encoding = "ISO-8859-1")) 
+# ehedaten <- read_delim(download_link, delim = ";",
+                       #locale = locale(encoding = "ISO-8859-1")) 
+# Daten lokal speichern
+
+# (ehedaten, "data/ehedaten.csv")
 
 ```
+
+```{r daten-laden}
+
+# Daten aus lokalem Ordner laden
+
+ehedaten <- read_csv(file = "data/ehedaten.csv")
+
+```
+
 
 ```{r daten-transform}
 
