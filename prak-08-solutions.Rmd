@@ -123,8 +123,8 @@ ehedaten_tidy <- ehedaten %>%
 
 Startet mit dem Dataframe Objekt `ehedaten_tidy`, nutzt Funktionen aus dem `dplyr` Package und bearbeitet folgende Aufgaben: 
 
-1. Was sind die Top 10 Kirchgemeinden in denen geheiratet wurde? 
-2. Speicher die Namen der Top 10 Kirchgemeinden als einen Vektor mit dem Namen `vektor_top10_kirchgemeinde`
+1. **Person 1:** Was sind die Top 10 Kirchgemeinden in denen geheiratet wurde? 
+2. **Person 1:** Speicher die Namen der Top 10 Kirchgemeinden als einen Vektor mit dem Namen `vektor_top10_kirchgemeinde`
 3. **Person 1:** Knit, commit und push all deine Änderungen auf GitHub
 4. **Person 2:** In RStudio, öffne den Reiter Git im Fenster oben rechts. 
 5. **Person 2:** Klicke auf "Pull" (der blaue Pfeil, rechts neben "Commit", welcher nach unten zeigt)
@@ -146,10 +146,10 @@ vektor_top10_kirchgemeinde <- ehedaten_tidy %>%
 
 Startet mit dem Dataframe Objekt `ehedaten_tidy`, nutzt Funktionen aus dem `dplyr` Package und bearbeitet folgende Aufgaben: 
 
-1. Für wieviele Jahre gibt es Eheschliessungen?
-2. Was sind die Top 10 Jahre für Eheschliessungen?
-3. In welchen Monaten wurde am häufigsten geheiratet?
-4. Was ist das Datum von dem Tag an dem im Grossmünster die meisten Ehen geschlossen?
+1. **Person 1:** Für wieviele Jahre gibt es Eheschliessungen?
+2. **Person 1:** Was sind die Top 10 Jahre für Eheschliessungen?
+3. **Person 1:** In welchen Monaten wurde am häufigsten geheiratet?
+4. **Person 1:** Was ist das Datum von dem Tag an dem im Grossmünster die meisten Ehen geschlossen?
 5. **Person 1:** Knit, commit und push all deine Änderungen auf GitHub
 6. **Person 2:** In RStudio, öffne den Reiter Git im Fenster oben rechts. 
 7. **Person 2:** Klicke auf "Pull" (der blaue Pfeil, rechts neben "Commit", welcher nach unten zeigt)
@@ -189,12 +189,12 @@ ehedaten_n_mw <- ehedaten_tidy %>%
 
 **Bonus:** Startet mit dem Dataframe Objekt `ehedaten_n_mw`, nutzt Funktionen aus dem `ggplot2` Package, und bearbeitet folgende Aufgaben: 
 
-1. Erstellt ein verbundenes Streudiagram, mit:
-- Variable `wochentag` auf der x-Achse
-- Variable `n` auf der y-Achse
-- Gruppiert nach Monat
-- Facetted nach Monat
-2. Nutzt die Visualisierung um zu identifizieren an welchem Wochentag am häufigsten geheiratet wurde, und an welchem Wochentag am wengisten geheiratet wurde. Habt ihr Ideen warum das so sein könnte?
+1. **Person 1:** Erstellt ein verbundenes Streudiagram, mit:
+    - Variable `wochentag` auf der x-Achse
+    - Variable `n` auf der y-Achse
+    - Gruppiert nach Monat
+    - Facetted nach Monat
+2. **Person 1:** Nutzt die Visualisierung um zu identifizieren an welchem Wochentag am häufigsten geheiratet wurde, und an welchem Wochentag am wengisten geheiratet wurde. Habt ihr Ideen warum das so sein könnte?
 3. **Person 1:** Knit, commit und push all deine Änderungen auf GitHub
 4. **Person 2:** In RStudio, öffne den Reiter Git im Fenster oben rechts. 
 5. **Person 2:** Klicke auf "Pull" (der blaue Pfeil, rechts neben "Commit", welcher nach unten zeigt)
@@ -216,7 +216,7 @@ ehedaten_n_mw %>%
 
 Startet mit dem Dataframe Objekt `ehedaten_n_mw`, nutzt Funktionen aus dem `ggplot2` Package, und bearbeitet folgende Aufgaben: 
 
-1. Erstellt ein verbundenes Streudiagram, mit:
+1. **Person 1:** Erstellt ein verbundenes Streudiagram, mit:
     - Variable `monat` auf der x-Achse
     - Variable `n` auf der y-Achse
     - Gruppiert nach Wochentag
