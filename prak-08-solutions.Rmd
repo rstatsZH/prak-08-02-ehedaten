@@ -146,22 +146,28 @@ vektor_top10_kirchgemeinde <- ehedaten_tidy %>%
 
 Startet mit dem Dataframe Objekt `ehedaten_tidy`, nutzt Funktionen aus dem `dplyr` Package und bearbeitet folgende Aufgaben: 
 
-1. **Person 1:** Für wieviele Jahre gibt es Eheschliessungen?
-2. **Person 1:** Was sind die Top 10 Jahre für Eheschliessungen?
-3. **Person 1:** In welchen Monaten wurde am häufigsten geheiratet?
-4. **Person 1:** Was ist das Datum von dem Tag an dem im Grossmünster die meisten Ehen geschlossen?
-5. **Person 1:** Knit, commit und push all deine Änderungen auf GitHub
-6. **Person 2:** In RStudio, öffne den Reiter Git im Fenster oben rechts. 
-7. **Person 2:** Klicke auf "Pull" (der blaue Pfeil, rechts neben "Commit", welcher nach unten zeigt)
+1. **Person 1:** Was sind die Top 10 Jahre für Eheschliessungen?
+2. **Person 1:** In welchen zwei Monaten wurde am häufigsten geheiratet?
+3. **Person 1:** Was ist das Datum von dem Tag an dem im Grossmünster die meisten Ehen geschlossen?
+4. **Person 1:** Knit, commit und push all deine Änderungen auf GitHub
+
+5. **Person 2:** In RStudio, öffne den Reiter Git im Fenster oben rechts. 
+6. **Person 2:** Klicke auf "Pull" (der blaue Pfeil, rechts neben "Commit", welcher nach unten zeigt)
 
 ```{r}
+
+# Was sind die Top 10 Jahre für Eheschliessungen?
 
 ehedaten_tidy %>% 
   count(jahr) %>% 
   arrange(desc(n))
 
+# In welchen zwei Monaten wurde am häufigsten geheiratet?
+
 ehedaten_tidy %>% 
   count(monat)
+
+# Was ist das Datum von dem Tag an dem im Grossmünster die meisten Ehen geschlossen?
 
 ehedaten_tidy %>% 
   filter(kirchgemeinde == "Grossmünster") %>% 
@@ -171,7 +177,7 @@ ehedaten_tidy %>%
 
 ```
 
-## Übung 3
+## Übung 3 - Bonus
 
 **Achtung: Tauscht die Rollen und beachtet was für die jeweilige Rolle gilt. Nur Person 1 teilt den Bildschirm und erledigt die Aufgaben. Person 2 unterstützt verbal, aber schreibt selbst nicht in der R Markdown Datei**
 
@@ -192,8 +198,8 @@ ehedaten_n_mw <- ehedaten_tidy %>%
 1. **Person 1:** Erstellt ein verbundenes Streudiagram, mit:
     - Variable `wochentag` auf der x-Achse
     - Variable `n` auf der y-Achse
-    - Gruppiert nach Monat
-    - Facetted nach Monat
+    - Variable `monat` für das Argument 'group'
+    - Facetted nach Monat (**Tipp** `facet_wrap()`)
 2. **Person 1:** Nutzt die Visualisierung um zu identifizieren an welchem Wochentag am häufigsten geheiratet wurde, und an welchem Wochentag am wengisten geheiratet wurde. Habt ihr Ideen warum das so sein könnte?
 3. **Person 1:** Knit, commit und push all deine Änderungen auf GitHub
 4. **Person 2:** In RStudio, öffne den Reiter Git im Fenster oben rechts. 
@@ -219,7 +225,7 @@ Startet mit dem Dataframe Objekt `ehedaten_n_mw`, nutzt Funktionen aus dem `ggpl
 1. **Person 1:** Erstellt ein verbundenes Streudiagram, mit:
     - Variable `monat` auf der x-Achse
     - Variable `n` auf der y-Achse
-    - Gruppiert nach Wochentag
+    - Variable `wochentag` für das Argument 'group'
     - Farbskaliert nach Wochentag
     - Einer angepassten Farbpalette aus der Colorbrewer Skalierung vom Typ "qual" 
 2. **Person 1:** Knit, commit und push all deine Änderungen auf GitHub
