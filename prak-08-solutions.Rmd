@@ -23,6 +23,10 @@ library(ggplot2)
 library(lubridate)
 library(readr)
 
+## Package welches nicht Teil des Tidyverse ist
+
+library(janitor)
+
 ```
 
 Ein Datensatz vom Staatsarchiv des Kantons Zürich mit Ehedaten im aus dem 16. bis 18. Jahrhundert. Abgedeckt wird der Zeitraum vom 1. Januar 1500 bis 31. Dezember 1800. 
@@ -61,6 +65,7 @@ Nach jeder Übung werden die Rollen getauscht.
 
 1. **Person 1:** Füge eure Namen und das Datum im YAML Header hinzu
 2. **Person 1:** Knit, commit und push all deine Änderungen auf GitHub
+
 3. **Person 2:** In RStudio, öffne den Reiter Git im Fenster oben rechts. 
 4. **Person 2:** Klicke auf "Pull" (der blaue Pfeil, rechts neben "Commit", welcher nach unten zeigt)
 
@@ -68,54 +73,42 @@ Nach jeder Übung werden die Rollen getauscht.
 
 # Ich habe die Daten hier für euch heruntergeladen und in dem Ordner "data" gespeichert.
 
-# Daten importieren
-
-# download_link <- "https://zenodo.org/record/3964315/files/EDB_16_18_Jh_Stand_2020_07_22.CSV?download=1"
-
-# ehedaten <- read_delim(download_link, delim = ";",
-                       #locale = locale(encoding = "ISO-8859-1")) 
-# Daten lokal speichern
-
-# (ehedaten, "data/ehedaten.csv")
-
-```
-
-```{r daten-laden}
-
-# Daten aus lokalem Ordner laden
-
 ehedaten <- read_csv(file = "data/ehedaten.csv")
 
 ```
+
 
 ```{r daten-transform}
 
 # Daten transformieren
 
 ehedaten_tidy <- ehedaten %>% 
-
   # bereinige die Namen
-  janitor::clean_names() %>% 
+  clean_names() %>% 
   
   # selektiere nur einen Teil der Variablen
-  select(nachname_mann:kirchgemeinde) %>% 
+  select(nachname_mann:herkunft_frau, datum, kirchgemeinde) %>% 
   
   # erstelle eine neue Variable mit der Klasse "Date"
-  mutate(datum = parse_date(entstehungszeitraum, format = "%Y.%m.%d")) %>%
+  mutate(datum = lubridate::as_date(datum)) %>% 
   
   # entferne die Beobachtungen, welche nicht umgewandelt werden konnten
   filter(!is.na(datum)) %>% 
-
+  
+  # entferne die Beobachtungen, welche das Datum fälschlich zurückgeben
+  filter(datum < "2000-01-01")  %>%
+  
   # erstelle zusätzliche Variablen aus der neuen Variable datum
   # nutze dazu Funktionen aus dem lubridate Package
   mutate(
     jahr = year(datum),
-    monat = month(datum, label = TRUE),
+    monat = month(datum, label = TRUE, locale = "de_CH.UTF-8"),
     tag = day(datum),
-    wochentag = wday(datum, label = TRUE, week_start = 1)
+    wochentag = wday(datum, label = TRUE, abbr = FALSE, locale = "de_CH.UTF-8", week_start = 1)
   )
 
 ```
+
 
 ## Übung 1 
 
